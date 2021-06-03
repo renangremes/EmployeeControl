@@ -1,4 +1,4 @@
-﻿using EmployeeControl.Models;
+﻿using EmployeeControl.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

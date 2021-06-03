@@ -1,6 +1,6 @@
 using System;
 
-namespace EmployeeControl.Models
+namespace EmployeeControl.Models.ViewModels
 {
     public class ErrorViewModel
     {

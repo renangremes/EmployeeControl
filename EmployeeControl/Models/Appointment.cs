@@ -15,7 +15,7 @@ namespace EmployeeControl.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime hour { get; set; }
-        public Employee Employee { get; set; }
+        public Employees Employees { get; set; }
 
         //Construtores
         public Appointment()
@@ -23,12 +23,12 @@ namespace EmployeeControl.Models
 
         }
 
-        public Appointment(int id, DateTime date, DateTime hour, Employee employee)
+        public Appointment(int id, DateTime date, DateTime hour, Employees employee)
         {
             ID = id;
             this.date = date;
             this.hour = hour;
-            Employee = employee;
+            Employees = employee;
         }
     }
 }

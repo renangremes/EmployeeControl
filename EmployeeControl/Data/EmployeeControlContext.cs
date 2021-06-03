@@ -14,7 +14,7 @@ namespace EmployeeControl.Data
         {
         }
 
-        public DbSet<EmployeeControl.Models.Employee> Employees { get; set; }
+        public DbSet<EmployeeControl.Models.Employees> Employees { get; set; }
 
         public DbSet<EmployeeControl.Models.Company> Company { get; set; }
 

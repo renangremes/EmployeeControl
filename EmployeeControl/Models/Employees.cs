@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeControl.Models
 {
-    public class Employee
+    public class Employees
     {
         //Atributos
         public int ID { get; private set; }
@@ -32,12 +32,12 @@ namespace EmployeeControl.Models
         public Company Company { get; set; }
 
         //Construtores
-        public Employee()
+        public Employees()
         {
 
         }
 
-        public Employee(int id, string name, string address, string postalCode, string city, string state, string office, DateTime dateBirthday, DateTime dateAdmission, string cPF, string rG, string pIS, double salary, string phone, string celPhone, string email, Company company)
+        public Employees(int id, string name, string address, string postalCode, string city, string state, string office, DateTime dateBirthday, DateTime dateAdmission, string cPF, string rG, string pIS, double salary, string phone, string celPhone, string email, Company company)
         {
             ID = id;
             this.name = name;

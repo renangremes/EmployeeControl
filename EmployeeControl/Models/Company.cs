@@ -15,7 +15,7 @@ namespace EmployeeControl.Models
         public string phone { get; set; }
         public string celPhone { get; set; }
         public string email { get; set; }
-        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+        public ICollection<Employees> Employees { get; set; } = new List<Employees>();
     
         //Construtores
         public Company()

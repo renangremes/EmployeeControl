@@ -10,22 +10,22 @@ using EmployeeControl.Models;
 
 namespace EmployeeControl.Controllers
 {
-    public class EmployeesController : Controller
+    public class CompaniesController : Controller
     {
         private readonly EmployeeControlContext _context;
 
-        public EmployeesController(EmployeeControlContext context)
+        public CompaniesController(EmployeeControlContext context)
         {
             _context = context;
         }
 
-        // GET: Employees
+        // GET: Companies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            return View(await _context.Company.ToListAsync());
         }
 
-        // GET: Employees/Details/5
+        // GET: Companies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace EmployeeControl.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.Employees
+            var company = await _context.Company
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (employees == null)
+            if (company == null)
             {
                 return NotFound();
             }
 
-            return View(employees);
+            return View(company);
         }
 
-        // GET: Employees/Create
+        // GET: Companies/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: Companies/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,name,address,postalCode,city,state,office,dateBirthday,dateAdmission,CPF,RG,PIS,salary,phone,celPhone,email")] Employee employees)
+        public async Task<IActionResult> Create([Bind("ID,name,CNPJ,address,postalCode,city,state,phone,celPhone,email")] Company company)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employees);
+                _context.Add(company);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(employees);
+            return View(company);
         }
 
-        // GET: Employees/Edit/5
+        // GET: Companies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace EmployeeControl.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.Employees.FindAsync(id);
-            if (employees == null)
+            var company = await _context.Company.FindAsync(id);
+            if (company == null)
             {
                 return NotFound();
             }
-            return View(employees);
+            return View(company);
         }
 
-        // POST: Employees/Edit/5
+        // POST: Companies/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,name,address,postalCode,city,state,office,dateBirthday,dateAdmission,CPF,RG,PIS,salary,phone,celPhone,email")] Employee employees)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,name,CNPJ,address,postalCode,city,state,phone,celPhone,email")] Company company)
         {
-            if (id != employees.ID)
+            if (id != company.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace EmployeeControl.Controllers
             {
                 try
                 {
-                    _context.Update(employees);
+                    _context.Update(company);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeesExists(employees.ID))
+                    if (!CompanyExists(company.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace EmployeeControl.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(employees);
+            return View(company);
         }
 
-        // GET: Employees/Delete/5
+        // GET: Companies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace EmployeeControl.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.Employees
+            var company = await _context.Company
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (employees == null)
+            if (company == null)
             {
                 return NotFound();
             }
 
-            return View(employees);
+            return View(company);
         }
 
-        // POST: Employees/Delete/5
+        // POST: Companies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employees = await _context.Employees.FindAsync(id);
-            _context.Employees.Remove(employees);
+            var company = await _context.Company.FindAsync(id);
+            _context.Company.Remove(company);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmployeesExists(int id)
+        private bool CompanyExists(int id)
         {
-            return _context.Employees.Any(e => e.ID == id);
+            return _context.Company.Any(e => e.ID == id);
         }
     }
 }

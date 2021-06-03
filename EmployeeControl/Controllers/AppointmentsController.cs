@@ -10,22 +10,22 @@ using EmployeeControl.Models;
 
 namespace EmployeeControl.Controllers
 {
-    public class EmployeesController : Controller
+    public class AppointmentsController : Controller
     {
         private readonly EmployeeControlContext _context;
 
-        public EmployeesController(EmployeeControlContext context)
+        public AppointmentsController(EmployeeControlContext context)
         {
             _context = context;
         }
 
-        // GET: Employees
+        // GET: Appointments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            return View(await _context.Appointment.ToListAsync());
         }
 
-        // GET: Employees/Details/5
+        // GET: Appointments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace EmployeeControl.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.Employees
+            var appointment = await _context.Appointment
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (employees == null)
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            return View(employees);
+            return View(appointment);
         }
 
-        // GET: Employees/Create
+        // GET: Appointments/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: Appointments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,name,address,postalCode,city,state,office,dateBirthday,dateAdmission,CPF,RG,PIS,salary,phone,celPhone,email")] Employee employees)
+        public async Task<IActionResult> Create([Bind("ID,date,hour")] Appointment appointment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employees);
+                _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(employees);
+            return View(appointment);
         }
 
-        // GET: Employees/Edit/5
+        // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace EmployeeControl.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.Employees.FindAsync(id);
-            if (employees == null)
+            var appointment = await _context.Appointment.FindAsync(id);
+            if (appointment == null)
             {
                 return NotFound();
             }
-            return View(employees);
+            return View(appointment);
         }
 
-        // POST: Employees/Edit/5
+        // POST: Appointments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,name,address,postalCode,city,state,office,dateBirthday,dateAdmission,CPF,RG,PIS,salary,phone,celPhone,email")] Employee employees)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,date,hour")] Appointment appointment)
         {
-            if (id != employees.ID)
+            if (id != appointment.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace EmployeeControl.Controllers
             {
                 try
                 {
-                    _context.Update(employees);
+                    _context.Update(appointment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeesExists(employees.ID))
+                    if (!AppointmentExists(appointment.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace EmployeeControl.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(employees);
+            return View(appointment);
         }
 
-        // GET: Employees/Delete/5
+        // GET: Appointments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace EmployeeControl.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.Employees
+            var appointment = await _context.Appointment
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (employees == null)
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            return View(employees);
+            return View(appointment);
         }
 
-        // POST: Employees/Delete/5
+        // POST: Appointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employees = await _context.Employees.FindAsync(id);
-            _context.Employees.Remove(employees);
+            var appointment = await _context.Appointment.FindAsync(id);
+            _context.Appointment.Remove(appointment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmployeesExists(int id)
+        private bool AppointmentExists(int id)
         {
-            return _context.Employees.Any(e => e.ID == id);
+            return _context.Appointment.Any(e => e.ID == id);
         }
     }
 }
